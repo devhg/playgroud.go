@@ -1,8 +1,8 @@
 package main
 
 import (
-	"LearnGo/dataStruct"
 	"fmt"
+	"github.com/QXQZX/LearnGo/m_interface"
 )
 
 /*
@@ -53,8 +53,7 @@ func callback(maps map[string]interface{}, f func(map[string]interface{})) error
 	return nil
 }
 func main() {
-	dataStruct.TestSlice()
-
+	m_interface.TestTypeAssert()
 	//u := Student{
 	//	Id:   1,
 	//	Name: "反射",
