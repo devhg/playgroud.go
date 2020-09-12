@@ -1,6 +1,9 @@
 package m_Test_Benchmark
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 //测试
 // go test .
@@ -22,7 +25,7 @@ func Test_cn_lengthOfLongestSubstring(t *testing.T) {
 		{"我是你我是", 3},
 	}
 	for _, tt := range tests {
-		if got := cn_lengthOfLongestSubstring(tt.s); got != tt.ans {
+		if got := Cn_lengthOfLongestSubstring(tt.s); got != tt.ans {
 			t.Errorf("cn_lengthOfLongestSubstring() = %v, want %v", got, tt.ans)
 		}
 	}
@@ -34,7 +37,17 @@ func Test_cn_lengthOfLongestSubstring(t *testing.T) {
 func Benchmark_cn_lengthOfLongestSubstring(b *testing.B) {
 	s := "按实际代理库时间时收集到的"
 	ans := 8
-	if got := cn_lengthOfLongestSubstring(s); got != ans {
+	if got := Cn_lengthOfLongestSubstring(s); got != ans {
 		b.Errorf("cn_lengthOfLongestSubstring() = %v, want %v", got, ans)
 	}
+}
+
+//实用pprof进行性能调优
+//go test -bench . -cpuprofile cpu.out
+//go tool pprof cpu.out
+
+func ExampleHello() {
+	fmt.Println(112)
+	// Output:
+	// 112
 }

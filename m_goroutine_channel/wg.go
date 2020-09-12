@@ -1,4 +1,4 @@
-package m_goroutine
+package m_goroutine_channel
 
 import (
 	"fmt"
@@ -55,6 +55,7 @@ func worker(wg *sync.WaitGroup) {
 	}
 	wg.Done()
 }
+
 //函数创建了一个 Go 协程的工作池。
 func createWorkBool(num int) {
 	var wg sync.WaitGroup
@@ -71,7 +72,7 @@ func TestWg() {
 	jobsNum := 100
 	done := make(chan bool)
 
-	go allocate(jobsNum) // 生成一定数量的job
+	go allocate(jobsNum)  // 生成一定数量的job
 	go createWorkBool(20) //创建工作池 有多个worker工作
 	go res(done)
 

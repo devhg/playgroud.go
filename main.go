@@ -16,15 +16,15 @@ func main() {
 	// Test goroutine
 
 	//fmt.Println("cpu num : ", runtime.NumCPU())
-	//go m_goroutine.Loop()
-	//go m_goroutine.Loop()
+	//go m_goroutine_channel.Loop()
+	//go m_goroutine_channel.Loop()
 
-	//go m_goroutine.Send()
-	//go m_goroutine.Receive()
+	//go m_goroutine_channel.Send()
+	//go m_goroutine_channel.Receive()
 	//time.Sleep(time.Second * 40)
 
 
-	//m_goroutine.TestWg()
+	//m_goroutine_channel.TestWg()
 
 	//m_point.TestPoint()
 	//m_point.TestPointArr()

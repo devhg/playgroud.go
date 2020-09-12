@@ -1,7 +1,9 @@
 package m_Test_Benchmark
 
+import "fmt"
+
 //最长无重复字符串 中文实现
-func cn_lengthOfLongestSubstring(s string) int {
+func Cn_lengthOfLongestSubstring(s string) int {
 	var lastOccurred = make(map[rune]int)
 
 	maxLength := 0
@@ -18,4 +20,8 @@ func cn_lengthOfLongestSubstring(s string) int {
 	}
 
 	return maxLength
+}
+
+func Hello() {
+	fmt.Println("hello")
 }

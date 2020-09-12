@@ -1,7 +1,8 @@
-package m_goroutine
+package m_goroutine_channel
 
 import (
 	"fmt"
+	"runtime"
 	"time"
 )
 
@@ -38,4 +39,16 @@ func Receive() {
 			fmt.Println("timeout...")
 		}
 	}
+}
+
+func Trace() {
+	var a [10]int
+	for i := 0; i < 10; i++ {
+		go func(ii int) { // go run -race xx.go 查看冲突
+			a[ii]++
+			runtime.Gosched() // 手动切换协程去操作
+		}(i)
+	}
+	time.Sleep(time.Millisecond)
+	fmt.Println(a)
 }
