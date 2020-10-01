@@ -35,3 +35,13 @@ func TestTestSlice2(t *testing.T) {
 	appe(slice)
 	fmt.Println(slice)
 }
+
+var res []*string
+
+func test(m map[string]int) {
+	m["2"] = 2
+}
+
+func TestTestSlice3(t *testing.T) {
+	a := true
+}

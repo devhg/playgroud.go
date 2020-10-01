@@ -3,13 +3,14 @@ package dataStruct
 import (
 	"fmt"
 	"sort"
+	"testing"
 )
 
 //map使用哈希表，必须可以比较相等
 //除了slice map function的内建类型都可以作为key
 //struct类型不包含上述字段，也可以作为可以
-func TestMap() {
-	fmt.Println([]byte("abdbcd"))
+func TestMap(t *testing.T) {
+	//fmt.Println([]byte("abdbcd"))
 	//defineMap()
 	//traverMap()
 	//getValue()

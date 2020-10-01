@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/QXQZX/LearnGo/m_interface"
 )
 
 /*
@@ -40,7 +39,7 @@ type Student struct {
 	Name string
 }
 
-func (Student) Hello(msg string) {
+func (s Student) Hello(msg string) {
 	fmt.Println()
 	fmt.Println("hello, ", msg)
 }
@@ -53,7 +52,7 @@ func callback(maps map[string]interface{}, f func(map[string]interface{})) error
 	return nil
 }
 func main() {
-	m_interface.TestTypeAssert()
+	//m_interface.TestTypeAssert()
 	//u := Student{
 	//	Id:   1,
 	//	Name: "反射",

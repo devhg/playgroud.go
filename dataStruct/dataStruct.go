@@ -5,6 +5,14 @@ import (
 	"reflect"
 )
 
+type User struct {
+	Name string
+	Age  int
+}
+
+func (u User) Hello() {
+
+}
 func Test() {
 
 	// make返回引用类型

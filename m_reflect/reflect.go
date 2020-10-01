@@ -2,6 +2,7 @@ package m_reflect
 
 import (
 	"fmt"
+	"log"
 	"reflect"
 )
 
@@ -84,7 +85,7 @@ func TestReflect(t interface{}) {
 
 }
 
-func TestReflect1()  {
+func TestReflect1() {
 	//u := &user{1, "2"}
 	//elem := m_reflect.TypeOf(u).Elem()
 
@@ -94,17 +95,19 @@ func TestReflect1()  {
 	//两种等效
 }
 
-//func main() {
-//	o := order{
-//		id:   1,
-//		name: "zgh",
-//	}
-//	//emp := employee{
-//	//	name:   "zgh",
-//	//	age:    20,
-//	//	salary: 1.2,
-//	//}
-//	insert(o)
-//	//insert(emp)
-//
-//}
+// CallMethod calls the registered hooks
+func CallMethod(method string, value interface{}) {
+	rv := reflect.Indirect(reflect.ValueOf(value))
+	fmt.Println(rv.NumMethod())
+	fm := rv.MethodByName(method)
+
+	//param := []reflect.Value{reflect.ValueOf(s)}
+	if fm.IsValid() {
+		if v := fm.Call(nil); len(v) > 0 {
+			if err, ok := v[0].Interface().(error); ok {
+				log.Fatal(err)
+			}
+		}
+	}
+	return
+}
