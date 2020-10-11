@@ -18,3 +18,7 @@ func TestBinaryTree_(t *testing.T) {
 	b = append(b, a...)
 	fmt.Println(b)
 }
+
+func TestBame(t *testing.T) {
+	fmt.Println(123131)
+}
