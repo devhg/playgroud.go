@@ -1,4 +1,4 @@
-94
+https://www.bilibili.com/video/BV1t5411Y7xQ/
 ```text
 P1 1-1 课程导读
 P2 1-2 安装与环境

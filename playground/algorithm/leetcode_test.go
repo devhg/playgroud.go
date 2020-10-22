@@ -6,10 +6,11 @@ import (
 )
 
 func TestMains(t *testing.T) {
-	//Main()
-	a := 1
-	test(&a)
-	fmt.Println(a)
+	slice := make([]int, 0)
+	slice = append(slice, 1)
+
+	p := slice[0:len(slice)]
+	fmt.Println(p)
 }
 
 func test(a *int) {

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/QXQZX/LearnGo/m_goroutine_channel"
+	"github.com/QXQZX/LearnGo/playground/basiclearn/m_goroutine_channel"
 	"time"
 )
 

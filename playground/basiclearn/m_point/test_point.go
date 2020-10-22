@@ -18,7 +18,6 @@ func TestPoint() {
 	fmt.Printf("ap取值运算 %d\n", *ap)
 	fmt.Printf("app取值运算 %d\n", **app)
 
-
 	var test = new(t)
 	fmt.Println(test)
 }

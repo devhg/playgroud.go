@@ -21,9 +21,9 @@ func Test() {
 	// Initialize the encoder and decoder.  Normally enc and dec would be
 	// bound to network connections and the encoder and decoder would
 	// run in different processes.
-	var network bytes.Buffer   // Stand-in for a network connection
+	var network bytes.Buffer        // Stand-in for a network connection
 	enc := gob.NewEncoder(&network) // Will write to network.
-	dec := gob.NewDecoder(&network)	// Will read from network.
+	dec := gob.NewDecoder(&network) // Will read from network.
 	// Encode (send) the value.
 	err := enc.Encode(P{3, 4, 5, "Pythagoras"})
 	if err != nil {

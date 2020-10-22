@@ -12,7 +12,7 @@ import (
 3、函数可以作为参数
 4、没有默认参数，可选参数
 5、有可变长参数
- */
+*/
 
 func apply(op func(int, int) int, a, b int) int {
 	pointer := reflect.ValueOf(op).Pointer()  // 反射获取函数指针
@@ -31,7 +31,7 @@ func Test_func_params() {
 }
 
 // 可变长参数
-func Test_longer_args(nums ...int) (sum int){
+func Test_longer_args(nums ...int) (sum int) {
 	//sum = 0
 	for i := range nums {
 		sum += nums[i]
