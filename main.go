@@ -1,26 +1,30 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/QXQZX/LearnGo/playground/basiclearn/m_goroutine_channel"
-	"time"
+	"os"
 )
 
-type Base struct {
+type Respond struct {
+	Status  int    `json:"status"`
+	Message string `json:"message"`
+	Result  User   `json:"result,omitempty"`
 }
 
-type Child struct {
-	Base
+type User struct {
+	Name string `json:"name,omitempty"`
+	Age  int    `json:"age,omitempty"`
 }
 
 func main() {
-	pool := m_goroutine_channel.NewGoPool(m_goroutine_channel.WithLimitGoPool(3))
-	defer pool.Wait()
-
-	for i := 0; i < 100; i++ {
-		pool.Submit(func() {
-			fmt.Println(i)
-		})
-		time.Sleep(1 * time.Second)
+	args := os.Args
+	fmt.Println(args)
+	body := `{"status":1,"message":"OK","result":{"name":"brad","age":19}}`
+	respond := &Respond{}
+	_ = json.Unmarshal([]byte(body), respond)
+	if respond.Status != 1 {
+		panic("获取失败")
 	}
+	fmt.Printf("%+v", respond)
 }

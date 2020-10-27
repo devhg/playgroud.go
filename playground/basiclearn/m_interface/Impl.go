@@ -94,11 +94,11 @@ func TestInterface() {
 
 	var bp BigPig
 	bp = mPig{}
-	fmt.Printf("%T, %v\n", bp, bp)
+	fmt.Printf("%Test, %v\n", bp, bp)
 
 	var p Pig
 	p = bp
-	fmt.Printf("%T, %v\n", p, p)
+	fmt.Printf("%Test, %v\n", p, p)
 
 	switch v := p.(type) {
 	case *mPig:

@@ -43,4 +43,17 @@ func Enum() {
 		pb
 	)
 	fmt.Println(b, kb, mb, gb, tb, pb)
+
+	const (
+		aa = iota   // iota = 0
+		bb          // iota = 1
+		cc          // iota = 2
+		dd = "a21a" //独立值 iota += 1
+		ee          //独立值 iota += 1
+		ff = iota   // 返回iota += 1
+		gg          // iota += 1
+	)
+	//0 1 2 a21a a21a 5 6
+	//通过该案例可以明显看到iota遇到主动赋值的条目时，并不会终止累加，而是会继续隐式增加iota的值。
+	fmt.Println(aa, bb, cc, dd, ee, ff, gg)
 }
