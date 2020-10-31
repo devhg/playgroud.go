@@ -19,6 +19,10 @@ import (
 
 4. WithValue函数和取消Context无关，它是为了生成一个绑定了一个键值对数据的Context，这个绑定的数据可以通过
 Context.Value方法访问到，后面我们会专门讲。
+
+
+5. type CancelFunc func()取消函数的类型，
+该函数可以取消一个Context，以及这个节点Context下所有的所有的Context，不管有多少层级。
 */
 func TestContext(t *testing.T) {
 	//ctx, cancel := context.WithCancel(context.Background())
@@ -69,12 +73,45 @@ func handle(ctx context.Context, duration time.Duration) {
 	}
 }
 
-func TestChan(t *testing.T) {
-	ints := make(chan int, 1)
-	ints <- 1
-	close(ints)
+/*
+Context 使用原则
+1. 不要把Context放在结构体中，要以参数的方式传递
+2. 以Context作为参数的函数方法，应该把Context作为第一个参数，放在第一位。
+3. 给一个函数方法传递Context的时候，不要传递nil，如果不知道传递什么，就使用context.TODO
+4. Context的Value相关方法应该传递必须的数据，不要什么数据都使用这个传递
+5. Context是线程安全的，可以放心的在多个goroutine中传递
+*/
 
-	go func() {
-		fmt.Println(<-ints)
-	}()
+/*************************************************/
+
+//我们可以使用context.WithValue方法附加一对K-V的键值对，这里Key必须是等价性的，也就是具有可比性；Value值要是线程安全的。
+//
+//这样我们就生成了一个新的Context，这个新的Context带有这个键值对，在使用的时候，可以通过Value方法读取ctx.Value(key)。
+//
+//记住，使用WithValue传值，一般是必须的值，不要什么值都传递。
+func TestWithValue(t *testing.T) {
+	ctx, cancel := context.WithCancel(context.Background())
+
+	valueCtx := context.WithValue(ctx, "name", "监控1")
+	go watchValueCtx(valueCtx)
+	go watchValueCtx(valueCtx)
+	go watchValueCtx(valueCtx)
+
+	time.Sleep(2 * time.Second)
+	fmt.Println("可以了，通知监控停止")
+	cancel()
+	time.Sleep(1 * time.Second)
+}
+
+func watchValueCtx(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			fmt.Println(ctx.Value("name"), "监控推出", ctx.Err())
+			return
+		default:
+			fmt.Println(ctx.Value("name"), "监控中")
+			time.Sleep(1 * time.Second)
+		}
+	}
 }
