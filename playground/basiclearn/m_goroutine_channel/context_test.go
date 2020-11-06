@@ -115,3 +115,48 @@ func watchValueCtx(ctx context.Context) {
 		}
 	}
 }
+
+func TestSend2(t *testing.T) {
+	ints := make(chan int)
+	go handleClient(ints)
+	time.Sleep(3 * time.Second)
+	ints <- 1
+	time.Sleep(3 * time.Second)
+}
+
+func handleClient(close chan int) {
+	ctx, cancel := context.WithCancel(context.Background())
+	go handle1(ctx)
+	for {
+		select {
+		case <-close:
+			cancel()
+			fmt.Println("handleClient", ctx.Err())
+			return
+		}
+	}
+}
+
+func handle1(ctx context.Context) {
+	subCtx, cancelFunc := context.WithCancel(ctx)
+	go print(subCtx)
+	for {
+		select {
+		case <-ctx.Done():
+			cancelFunc()
+			fmt.Println("handle1", ctx.Err())
+			return
+		}
+	}
+
+}
+
+func print(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			fmt.Println("print", ctx.Err())
+			return
+		}
+	}
+}

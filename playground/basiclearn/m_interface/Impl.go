@@ -17,37 +17,6 @@ type Cat struct {
 	Age  int
 }
 
-type Dog struct {
-	ID   int
-	Name string
-	Age  int
-}
-
-type mPig struct {
-}
-
-func (m mPig) String() string {
-	// 实现stringer 相当于java的toString 方法
-	// fmt.Println(bp)会打印返回值
-	return "{mPig:...}"
-}
-
-func (m mPig) Run() string {
-	panic("implement me")
-}
-
-func (m mPig) Eat() string {
-	panic("implement me")
-}
-
-func (m mPig) Sleep() string {
-	panic("implement me")
-}
-
-func (m mPig) Drink() string {
-	panic("implement me")
-}
-
 func (c *Cat) Eat() string {
 	fmt.Println("cat eating")
 	return ""
@@ -58,6 +27,12 @@ func (c *Cat) Run() string {
 	return ""
 }
 
+type Dog struct {
+	ID   int
+	Name string
+	Age  int
+}
+
 func (d *Dog) Eat() string {
 	fmt.Println("dog eating")
 	return ""
@@ -65,6 +40,35 @@ func (d *Dog) Eat() string {
 
 func (d *Dog) Run() string {
 	fmt.Println("dog Running")
+	return ""
+}
+
+type mPig struct {
+}
+
+// 实现stringer 相当于java的toString 方法
+func (m mPig) String() string {
+	// fmt.Println(bp)会打印返回值
+	return "{mPig:...}"
+}
+
+func (m mPig) Run() string {
+	fmt.Println("mPig running")
+	return ""
+}
+
+func (m mPig) Eat() string {
+	fmt.Println("mPig eating")
+	return ""
+}
+
+func (m mPig) Sleep() string {
+	fmt.Println("mPig sleeping")
+	return ""
+}
+
+func (m mPig) Drink() string {
+	fmt.Println("mPig drinking")
 	return ""
 }
 
@@ -79,6 +83,7 @@ func PigDo(bp BigPig) {
 	bp.Drink()
 	bp.Sleep()
 }
+
 func TestInterface() {
 	cat := Cat{
 		ID:   1,
@@ -94,11 +99,11 @@ func TestInterface() {
 
 	var bp BigPig
 	bp = mPig{}
-	fmt.Printf("%Test, %v\n", bp, bp)
+	fmt.Printf("%T, %v\n", bp, bp)
 
 	var p Pig
 	p = bp
-	fmt.Printf("%Test, %v\n", p, p)
+	fmt.Printf("%T, %v\n", p, p)
 
 	switch v := p.(type) {
 	case *mPig:
@@ -109,9 +114,29 @@ func TestInterface() {
 		break
 	}
 
-	fmt.Println(&cat)
-	AnimalDo(&cat)
+	AnimalDo(&cat) // 指针接收器必须传地址
 	AnimalDo(&dog)
+	AnimalDo(bp)
 
-	fmt.Println(bp)
+	fmt.Println(bp) // 实现了stringer 相当于java的toString 方法
+}
+
+//下面方法只适合于interface
+//xx.(type)只能用于switch中
+//xx.(int)强制转成int类型
+func TypeAssert() {
+	var q interface{} = mPig{}
+
+	switch v := q.(type) {
+	case mPig:
+		fmt.Println("mPig", v)
+	case *mPig:
+		fmt.Println("*mPig", v)
+	}
+
+	if s, ok := q.(int); ok {
+		fmt.Println(s)
+	} else {
+		fmt.Println("err")
+	}
 }
