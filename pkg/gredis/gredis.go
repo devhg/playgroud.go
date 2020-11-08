@@ -103,6 +103,8 @@ func LikeDeletes(key string) error {
 	return nil
 }
 
+// 三种方式对比 https://www.jianshu.com/p/a0ce482ac4ea
+
 // Hash store
 
 //利用redis库自带的Args 和 AddFlat对结构体进行转换。然后以hash类型存储。
