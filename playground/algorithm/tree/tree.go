@@ -6,33 +6,33 @@ import (
 )
 
 type TreeNode struct {
-	Value     int
-	LeftNode  *TreeNode
-	RightNode *TreeNode
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
 func (tn *TreeNode) NewTreeNode(val int) *TreeNode {
-	tn.Value = val
-	tn.LeftNode = nil
-	tn.RightNode = nil
+	tn.Val = val
+	tn.Left = nil
+	tn.Right = nil
 	return tn
 }
 
 func InitBinaryTree(root *TreeNode) *TreeNode {
 	l := TreeNode{}
 	r := TreeNode{}
-	root.LeftNode = l.NewTreeNode(2)
-	root.RightNode = r.NewTreeNode(3)
-	l2 := TreeNode{}
-	ll2 := TreeNode{}
-	root.LeftNode.LeftNode = l2.NewTreeNode(4)
-	root.LeftNode.RightNode = ll2.NewTreeNode(5)
+	root.Left = l.NewTreeNode(9)
+	root.Right = r.NewTreeNode(20)
+	rl := TreeNode{}
+	rr := TreeNode{}
+	root.Right.Left = rl.NewTreeNode(15)
+	root.Right.Right = rr.NewTreeNode(7)
 	return root
 }
 
 func BinaryTree() *TreeNode {
-	root := TreeNode{}
-	node := InitBinaryTree(root.NewTreeNode(1))
+	root := &TreeNode{}
+	node := InitBinaryTree(root.NewTreeNode(3))
 	return node
 }
 
@@ -40,7 +40,7 @@ func GetNodeSum(root *TreeNode) int {
 	if root == nil {
 		return 0
 	} else {
-		return GetNodeSum(root.LeftNode) + GetNodeSum(root.RightNode) + 1
+		return GetNodeSum(root.Left) + GetNodeSum(root.Right) + 1
 	}
 }
 
@@ -50,7 +50,7 @@ func GetDegree(root *TreeNode) (maxDegree int) {
 	}
 
 	maxDegree = 0
-	leftMax, rightMax := GetDegree(root.LeftNode), GetDegree(root.RightNode)
+	leftMax, rightMax := GetDegree(root.Left), GetDegree(root.Right)
 	if leftMax > rightMax {
 		maxDegree = leftMax
 	} else {
@@ -64,9 +64,9 @@ func PreOrder(root *TreeNode) {
 		return
 	}
 
-	fmt.Printf("%d->", root.Value)
-	PreOrder(root.LeftNode)
-	PreOrder(root.RightNode)
+	fmt.Printf("%d->", root.Val)
+	PreOrder(root.Left)
+	PreOrder(root.Right)
 }
 
 func InOrder(root *TreeNode) {
@@ -74,9 +74,9 @@ func InOrder(root *TreeNode) {
 		return
 	}
 
-	InOrder(root.LeftNode)
-	fmt.Printf("%d->", root.Value)
-	InOrder(root.RightNode)
+	InOrder(root.Left)
+	fmt.Printf("%d->", root.Val)
+	InOrder(root.Right)
 }
 
 func PostOrder(root *TreeNode) {
@@ -84,9 +84,9 @@ func PostOrder(root *TreeNode) {
 		return
 	}
 
-	PostOrder(root.LeftNode)
-	PostOrder(root.RightNode)
-	fmt.Printf("%d->", root.Value)
+	PostOrder(root.Left)
+	PostOrder(root.Right)
+	fmt.Printf("%d->", root.Val)
 }
 
 func IsBlanced(root *TreeNode) bool {
@@ -94,8 +94,8 @@ func IsBlanced(root *TreeNode) bool {
 		return true
 	}
 
-	ldeepth := GetDegree(root.LeftNode)
-	rdeepth := GetDegree(root.RightNode)
+	ldeepth := GetDegree(root.Left)
+	rdeepth := GetDegree(root.Right)
 
 	blanced := false
 	if math.Abs(float64(ldeepth-rdeepth)) <= 1 {
@@ -103,5 +103,27 @@ func IsBlanced(root *TreeNode) bool {
 	} else {
 		blanced = false
 	}
-	return blanced && IsBlanced(root.LeftNode) && IsBlanced(root.RightNode)
+	return blanced && IsBlanced(root.Left) && IsBlanced(root.Right)
+}
+
+func LevelOrder(root *TreeNode) [][]int {
+	ret := make([][]int, 0)
+	q := []*TreeNode{root}
+
+	for i := 0; len(q) > 0; i++ {
+		ret = append(ret, []int{})
+		p := []*TreeNode{}
+		for j := 0; j < len(q); j++ {
+			node := q[j]
+			ret[i] = append(ret[i], node.Val)
+			if node.Left != nil {
+				p = append(p, node.Left)
+			}
+			if node.Right != nil {
+				p = append(p, node.Right)
+			}
+		}
+		q = p
+	}
+	return ret
 }

@@ -1,24 +1,50 @@
 package tree
 
 import (
-	"fmt"
 	"testing"
 )
 
 func TestBinaryTree(t *testing.T) {
-	tree := BinaryTree()
-
-	deepth := IsBlanced(tree)
-	fmt.Println(deepth)
-	//PreOrder(tree)
+	tree := constructMaximumBinaryTree([]int{3, 2, 1, 6, 0, 5})
+	PreOrder(tree)
 }
-func TestBinaryTree_(t *testing.T) {
-	a := []int{1, 2, 3}
-	b := []int{5}
-	b = append(b, a...)
-	fmt.Println(b)
+func constructMaximumBinaryTree(nums []int) *TreeNode {
+	if len(nums) == 0 {
+		return nil
+	}
+	root := &TreeNode{Val: nums[0]}
+
+	for _, num := range nums {
+		root = insert(num, root)
+	}
+	return root
+}
+func insert(val int, root *TreeNode) *TreeNode {
+	if val < root.Val {
+		insertRight(val, root)
+		return root
+	}
+	return reRoot(val, root)
 }
 
-func TestBame(t *testing.T) {
-	fmt.Println(123131)
+func insertRight(val int, root *TreeNode) {
+	cur := root
+	for {
+		if cur.Right != nil {
+			if cur.Right.Val < val {
+				cur.Right = reRoot(val, cur.Right)
+				return
+			}
+			cur = cur.Right
+		} else {
+			cur.Right = &TreeNode{Val: val}
+			return
+		}
+	}
+}
+
+func reRoot(val int, root *TreeNode) (node *TreeNode) {
+	node = &TreeNode{Val: val, Left: nil, Right: nil}
+	node.Left = root
+	return
 }

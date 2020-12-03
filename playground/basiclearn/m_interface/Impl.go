@@ -38,7 +38,7 @@ func (d *Dog) Eat() string {
 	return ""
 }
 
-func (d *Dog) Run() string {
+func (d Dog) Run() string {
 	fmt.Println("dog Running")
 	return ""
 }
@@ -114,6 +114,16 @@ func TestInterface() {
 		break
 	}
 
+	/**
+	指针类型可以调用  值接收器和指针接收器的函数；
+	值类型仅可以调用  值接收器的函数；
+
+	类型实现接口中的函数 只要有一个函数用了指针接收器类型，之后就只能将该类型的地址赋值给该接口
+	或者说，结构体变量不能赋给用指针接收器实现的接口
+	*/
+
+	//var dogg Animal = dog // dog实现了Animal接口中，Eat用指针接收器实现，Run用值接收器，所以只能将地址赋值给Animal接口
+
 	AnimalDo(&cat) // 指针接收器必须传地址
 	AnimalDo(&dog)
 	AnimalDo(bp)
@@ -125,8 +135,8 @@ func TestInterface() {
 //xx.(type)只能用于switch中
 //xx.(int)强制转成int类型
 func TypeAssert() {
-	var q interface{} = mPig{}
-
+	var q Animal = mPig{}
+	// 范围大  ->  范围小的
 	switch v := q.(type) {
 	case mPig:
 		fmt.Println("mPig", v)
@@ -134,9 +144,9 @@ func TypeAssert() {
 		fmt.Println("*mPig", v)
 	}
 
-	if s, ok := q.(int); ok {
-		fmt.Println(s)
-	} else {
-		fmt.Println("err")
-	}
+	//if s, ok := q.(int); ok {
+	//	fmt.Println(s)
+	//} else {
+	//	fmt.Println("err")
+	//}
 }

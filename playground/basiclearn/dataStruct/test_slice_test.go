@@ -42,6 +42,20 @@ func test(m map[string]int) {
 	m["2"] = 2
 }
 
+func modify(nums []int) {
+	fmt.Printf("%p\n", nums)
+
+	fmt.Printf("%p\n", &nums[0]) //&nums==&nums[0]
+	fmt.Printf("%p\n", &nums)
+	nums[0] = 112
+}
+
 func TestTestSlice3(t *testing.T) {
-	a := true
+	a := []int{1, 2, 3}
+	fmt.Printf("%p\n", &a) // slice 指针的地址
+	fmt.Printf("%p\n", a)
+	fmt.Printf("%p\n", &a[0])
+
+	modify(a)
+	fmt.Println(a)
 }

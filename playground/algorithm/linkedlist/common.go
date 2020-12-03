@@ -52,6 +52,21 @@ func Ret1LinkedList(a int) (l1 *ListNode) {
 	return l1.Next
 }
 
+// 由slice构建链表
+func NewLinkedList(a []int) *ListNode {
+	l := &ListNode{}
+	cur := l
+	for _, i := range a {
+		node := &ListNode{
+			Val:  i,
+			Next: nil,
+		}
+		cur.Next = node
+		cur = node
+	}
+	return l.Next
+}
+
 func (l *ListNode) String() {
 	data := make([]int, 0)
 	for l != nil {

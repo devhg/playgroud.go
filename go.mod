@@ -1,4 +1,4 @@
-module github.com/QXQZX/LearnGo
+module github.com/devhg/LearnGo
 
 go 1.13
 
