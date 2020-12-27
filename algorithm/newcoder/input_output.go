@@ -39,3 +39,23 @@ func main() {
 	fmt.Fprint(writer, 1, " ", 2, "\n")
 	writer.Flush()
 }
+
+func read2() {
+	reader := bufio.NewReader(os.Stdin)
+	cnt := 0
+	for b, err := reader.ReadByte(); b >= ' ' && err == nil; b, err = reader.ReadByte() {
+		if b == '(' {
+			cnt++
+		} else if b == ')' && cnt > 0 {
+			cnt--
+		} else {
+			fmt.Println("NO")
+			return
+		}
+	}
+	if cnt == 0 {
+		fmt.Println("YES")
+	} else {
+		fmt.Println("NO")
+	}
+}

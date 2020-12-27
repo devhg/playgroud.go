@@ -1,16 +1,10 @@
-package main
+package heap_test
 
 import (
 	"container/heap"
 	"fmt"
+	"testing"
 )
-
-/*-------------------INPUT-------------------*/
-//var reader = bufio.new(os.Stdin)
-//var writer = bufio.NewWriter(os.Stdout)
-
-//var writer = bufio.NewWriter(os.Stdout)
-//var reader = bufio.NewScanner(os.Stdin)
 
 type IntHeap []int
 
@@ -19,8 +13,8 @@ func (h IntHeap) Len() int {
 }
 
 func (h IntHeap) Less(i, j int) bool {
-	//return h[i] < h[j]
-	return h[i] > h[j]
+	return h[i] < h[j] // 小顶堆
+	//return h[i] > h[j] // 大顶堆
 }
 
 func (h IntHeap) Swap(i, j int) {
@@ -38,7 +32,7 @@ func (h *IntHeap) Pop() interface{} {
 	return x
 }
 
-func main() {
+func TestRun(t *testing.T) {
 	h := &IntHeap{2, 1, 5}
 	heap.Init(h)
 	heap.Push(h, 3)

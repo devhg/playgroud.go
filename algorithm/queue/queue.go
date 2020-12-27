@@ -1,4 +1,4 @@
-package algorithm
+package queue
 
 type Queue []interface{}
 
