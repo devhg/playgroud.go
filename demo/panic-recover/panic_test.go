@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"os"
 	"sort"
 	"testing"
 	"time"
@@ -311,5 +312,107 @@ func TestRun7(t *testing.T) {
 			fmt.Println(time.Since(start))
 		}
 	}
+}
 
+/****************************************/
+//速率限制
+type Request interface{}
+
+func handle(r Request) {
+	fmt.Println(r.(int))
+}
+
+const RateLimit = 200 // 200 request/min
+const RateLimitPeriod = time.Minute
+
+//速率限制核心逻辑
+func handleRequest(requests <-chan Request) {
+	quotas := make(chan time.Time, RateLimit)
+	go func() {
+		ticker := time.NewTicker(RateLimitPeriod / RateLimit)
+		defer ticker.Stop()
+		for t := range ticker.C {
+			select {
+			case quotas <- t:
+			default:
+			}
+		}
+	}()
+
+	for request := range requests {
+		<-quotas
+		go handle(request)
+	}
+}
+
+func TestRun8(t *testing.T) {
+	requests := make(chan Request)
+	go handleRequest(requests)
+
+	for i := 0; ; i++ {
+		requests <- i
+	}
+}
+
+//乒乓球
+type Ball uint8
+
+func play(playName string, table chan Ball, serve bool) {
+	var recv, send chan Ball
+	if serve {
+		recv, send = nil, table
+	} else {
+		recv, send = table, nil
+	}
+
+	var lastValue Ball = 1
+	for {
+		select {
+		case send <- lastValue:
+		case value := <-recv:
+			fmt.Println(playName, value)
+			value += lastValue
+			if value < lastValue {
+				os.Exit(0) // uint8 overflow
+			}
+			lastValue = value
+		}
+		recv, send = send, recv
+		time.Sleep(time.Second)
+	}
+}
+
+func TestRun9(t *testing.T) {
+	table := make(chan Ball)
+	go play("A", table, false)
+	play("B", table, true)
+
+	//for c := make(chan struct{}, 1); true; {
+	//	select {
+	//	case <-c:
+	//		fmt.Println(1)
+	//	case c <- struct{}{}:
+	//		fmt.Println(2)
+	//	}
+	//	time.Sleep(time.Second)
+	//}
+}
+
+//select控制代码被执行的概率
+func TestRun10(t *testing.T) {
+	foo, bar := make(chan struct{}), make(chan struct{})
+	close(foo)
+	close(bar)
+	x, y := 0, 0
+	for i := 0; i < 1e5; i++ {
+		select {
+		case <-foo:
+			x++
+		case <-foo:
+			x++
+		case <-bar:
+			y++
+		}
+	}
+	fmt.Println(float64(x) / float64(y))
 }
