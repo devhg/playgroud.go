@@ -2,6 +2,7 @@ package algorithm
 
 /**
 快速幂
+时间复杂度 O(logN)
 */
 func Pow(base float64, exponent int) (ret float64) {
 	if equal(base, 0.0) {

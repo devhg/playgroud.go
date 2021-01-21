@@ -2,7 +2,7 @@ package Test
 
 import (
 	"fmt"
-	merror "github.com/QXQZX/LearnGo/pkg/error"
+	merror "github.com/devhg/LearnGo/pkg/error"
 	"log"
 	"net/http"
 	"strconv"

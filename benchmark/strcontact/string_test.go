@@ -9,6 +9,7 @@ import (
 //goos: darwin
 //goarch: amd64
 //pkg: github.com/devhg/LearnGo/benchmark/strcontact
+//Benchmark名字-CPU          循环次数          平均每次执行时间         平均每次的内存消耗     平均每次的分配次数
 //BenchmarkAdd-8              5529            236885 ns/op         1063894 B/op        999 allocs/op
 //BenchmarkFormat-8           3289            367180 ns/op         1096736 B/op       3000 allocs/op
 //BenchmarkBuffer-8         126193              8971 ns/op            6576 B/op          7 allocs/op

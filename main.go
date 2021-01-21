@@ -1,8 +1,9 @@
 package main
 
 import (
-	"container/heap"
 	"fmt"
+	"math"
+	"strings"
 )
 
 /*-------------------INPUT-------------------*/
@@ -12,38 +13,18 @@ import (
 //var writer = bufio.NewWriter(os.Stdout)
 //var reader = bufio.NewScanner(os.Stdin)
 
-type IntHeap []int
-
-func (h IntHeap) Len() int {
-	return len(h)
-}
-
-func (h IntHeap) Less(i, j int) bool {
-	//return h[i] < h[j]
-	return h[i] > h[j]
-}
-
-func (h IntHeap) Swap(i, j int) {
-	h[i], h[j] = h[j], h[i]
-}
-
-func (h *IntHeap) Push(x interface{}) {
-	*h = append(*h, x.(int))
-}
-
-func (h *IntHeap) Pop() interface{} {
-	n := len(*h)
-	x := (*h)[n-1]
-	*h = (*h)[:n-1]
-	return x
+func foo() int {
+	var a int64 = 91283472332
+	if a > math.MaxInt32 {
+		return math.MaxInt32
+	}
+	return int(a)
 }
 
 func main() {
-	h := &IntHeap{2, 1, 5}
-	heap.Init(h)
-	heap.Push(h, 3)
-	fmt.Printf("maxnum:%d\n", (*h)[0])
-	for h.Len() > 0 {
-		fmt.Println(heap.Pop(h))
-	}
+	//var a int64 = 10
+	//var b byte = '9'
+	//a += a*10 + int64(b - '0')
+	strings.TrimSpace()
+	fmt.Print(foo())
 }
