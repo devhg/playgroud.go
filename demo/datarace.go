@@ -35,6 +35,10 @@ import (
 //}
 
 // 最优雅的方式
+// 用于先上项目问题检测
+//curl http://127.0.0.1:6060/debug/pprof/trace?seconds=20 > trace.out
+//go tool trace trace.out
+
 func main() {
 	//这将使您的程序以二进制格式在文件trace.out中写入事件数据
 	//然后可以运行go tool trace trace.out。
