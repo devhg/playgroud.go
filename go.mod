@@ -1,6 +1,6 @@
 module github.com/devhg/LearnGo
 
-go 1.13
+go 1.16
 
 require (
 	github.com/gomodule/redigo v1.8.2
