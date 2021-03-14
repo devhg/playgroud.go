@@ -4,7 +4,6 @@ import (
 	_ "embed"
 	"fmt"
 	_ "net/http/pprof"
-	"unsafe"
 )
 
 /*-------------------INPUT-------------------*/
@@ -14,9 +13,6 @@ import (
 //var writer = bufio.NewWriter(os.Stdout)
 //var reader = bufio.NewScanner(os.Stdin)
 
-//go:embed n2.txt
-var s string
-
 const (
 	i = 1 << iota
 	j = 3 << iota
@@ -24,17 +20,22 @@ const (
 	l
 )
 
-func main() {
-	str := "12313"
-	ss1 := *(*[]byte)(unsafe.Pointer(&str))
-	fmt.Println(ss1)
+type UserIsEmpty struct {
+}
 
-	ss2 := *(*[]byte)(unsafe.Pointer(
-		&struct {
-			string
-			asdad int
-			//Cap int
-		}{str, len(str)},
-	))
-	fmt.Println(ss2)
+type UserHasField struct {
+	Age uint64 `json:"age"`
+}
+
+func FPrint(uIsEmpty UserIsEmpty, uHasField UserHasField) {
+	fmt.Printf("FPrint uIsEmpty:%p uHasField:%p\n", &uIsEmpty, &uHasField)
+}
+
+func main() {
+	uIsEmpty := UserIsEmpty{}
+	uHasField := UserHasField{
+		Age: 10,
+	}
+	FPrint(uIsEmpty, uHasField)
+	fmt.Printf("main: uIsEmpty:%p uHasField:%p\n", &uIsEmpty, &uHasField)
 }
