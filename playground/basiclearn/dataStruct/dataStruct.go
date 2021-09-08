@@ -1,4 +1,4 @@
-package dataStruct
+package datastruct
 
 import (
 	"fmt"
@@ -13,6 +13,7 @@ type User struct {
 func (u User) Hello() {
 
 }
+
 func Test() {
 
 	// make返回引用类型

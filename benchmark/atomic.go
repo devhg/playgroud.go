@@ -26,7 +26,7 @@ func cat(wg *sync.WaitGroup) {
 			break
 		}
 		if atomic.LoadInt32(&count)%3 == 0 {
-			//fmt.Print("A")
+			// fmt.Print("A")
 			atomic.AddInt32(&count, 1)
 		}
 	}
@@ -39,7 +39,7 @@ func dog(wg *sync.WaitGroup) {
 			break
 		}
 		if atomic.LoadInt32(&count)%3 == 1 {
-			//fmt.Print("B")
+			// fmt.Print("B")
 			atomic.AddInt32(&count, 1)
 		}
 	}

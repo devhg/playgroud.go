@@ -1,14 +1,14 @@
-package errgroup_test
+package main
 
 import (
 	"context"
 	"fmt"
-	"golang.org/x/sync/errgroup"
 	"log"
-	"testing"
+
+	"golang.org/x/sync/errgroup"
 )
 
-func TestMain1(t *testing.T) {
+func main() {
 	group, ctx := errgroup.WithContext(context.Background())
 
 	for i := 0; i < 100; i++ {
@@ -21,7 +21,7 @@ func TestMain1(t *testing.T) {
 			default:
 				if v > 90 {
 					fmt.Println("ended ", v)
-					return fmt.Errorf("error in %d\n", v)
+					return fmt.Errorf("error in %d", v)
 				}
 				fmt.Println("did ", v)
 				return nil

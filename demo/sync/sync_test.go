@@ -8,12 +8,12 @@ import (
 	"time"
 )
 
-//waitGroup
+// waitGroup
 func TestRun1(t *testing.T) {
-	//...
+	// ...
 }
 
-//once
+// once
 func TestRun2(t *testing.T) {
 	foo := func() {
 		fmt.Println(" i am foo")
@@ -34,9 +34,9 @@ func TestRun2(t *testing.T) {
 	wg.Wait()
 }
 
-//互斥锁Mutex 和 读写锁RWMutex
-//rwm的读锁被某个读取者持有，为了防止后续写入者得不到写锁，后续发生在某个被阻塞的获取写锁 之后的所有读锁都将被阻塞
-//rwm的写锁被某个写入者持有，为了防止后续读取者得不到读锁，后续发生在写锁释放之前的 获取读锁的行为都会获得读锁，即使这个过程中依然存在写锁请求
+// 互斥锁Mutex 和 读写锁RWMutex
+// rwm的读锁被某个读取者持有，为了防止后续写入者得不到写锁，后续发生在某个被阻塞的获取写锁 之后的所有读锁都将被阻塞
+// rwm的写锁被某个写入者持有，为了防止后续读取者得不到读锁，后续发生在写锁释放之前的 获取读锁的行为都会获得读锁，即使这个过程中依然存在写锁请求
 func TestRun3(t *testing.T) {
 	var m sync.RWMutex
 	go func() {
@@ -70,7 +70,7 @@ func TestRun3(t *testing.T) {
 	time.Sleep(time.Second * 4)
 }
 
-//sync.Cond 协程间通知
+// sync.Cond 协程间通知
 func TestRun4(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 

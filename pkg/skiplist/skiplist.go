@@ -10,7 +10,7 @@ const (
 	LevelFactor = 0.5 // 定义生成层级的因子
 )
 
-//几种错误码
+// 几种错误码
 const (
 	Ok = iota + 1
 	Duplicated
@@ -18,15 +18,15 @@ const (
 	NotInit
 )
 
-//定义一个描述数据的接口
-//用来描述一个实际存储的对象。
+// 定义一个描述数据的接口
+// 用来描述一个实际存储的对象。
 type Interface interface {
 	Less(p Interface) bool
 	Equal(p Interface) bool
 }
 
 type fakeNode struct {
-	//哨兵节点，伪节点
+	// 哨兵节点，伪节点
 }
 
 func (f fakeNode) Less(p Interface) bool {
@@ -37,26 +37,26 @@ func (f fakeNode) Equal(p Interface) bool {
 	return false
 }
 
-//链表节点
+// 链表节点
 type node struct {
 	data     Interface // 实际的数据
 	forwards []*node   // 索引存储的位置
 	level    int       // 节点的层级
 }
 
-//链表
+// 链表
 type SkipList struct {
 	head  *node  // 链表头节点，存储fakeNode
 	len   uint32 // 链表长度
 	level int    // 当前跳表最高层级
 }
 
-//初始化一个节点
+// 初始化一个节点
 func newNode(p Interface, l int) *node {
-	return &node{data: p, forwards: make([]*node, l, l), level: l}
+	return &node{data: p, forwards: make([]*node, l), level: l}
 }
 
-//初始化一个跳表
+// 初始化一个跳表
 func NewSkipList() *SkipList {
 	return &SkipList{head: newNode(&fakeNode{}, MaxLevel), len: 0, level: 1}
 }
@@ -90,12 +90,12 @@ func (sl *SkipList) Add(p Interface) int {
 	roadNode := [MaxLevel]*node{} // 跳跃路上的节点
 
 	for i := MaxLevel - 1; i >= 0; i-- {
-		//当前层级向后查找，找到当前节点下一个是nil 或 这下一个节点值大于p 为止
+		// 当前层级向后查找，找到当前节点下一个是nil 或 这下一个节点值大于p 为止
 		for ; cur.forwards[i] != nil; cur = cur.forwards[i] {
 			if cur.forwards[i].data.Equal(p) {
 				return Duplicated
 			}
-			//p小于下一个节点的data
+			// p小于下一个节点的data
 			if !cur.forwards[i].data.Less(p) {
 				roadNode[i] = cur // 记录下当前节点
 				break

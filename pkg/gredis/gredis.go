@@ -5,8 +5,9 @@ import (
 	"encoding/gob"
 	"encoding/json"
 	"fmt"
-	"github.com/gomodule/redigo/redis"
 	"time"
+
+	"github.com/gomodule/redigo/redis"
 )
 
 var RedisConn *redis.Pool
@@ -48,7 +49,7 @@ func Set(key string, data interface{}, time int) (string, error) {
 	}
 
 	reply, err := redis.String(conn.Do("SET", key, value))
-	conn.Do("EXPIRE", key, time)
+	_, _ = conn.Do("EXPIRE", key, time)
 
 	return reply, err
 }
@@ -107,8 +108,8 @@ func LikeDeletes(key string) error {
 
 // Hash store
 
-//利用redis库自带的Args 和 AddFlat对结构体进行转换。然后以hash类型存储。
-//该方式实现简单，但存在最大的问题是不支持数组结构（如：结构体中内嵌结构体、数组等）。
+// 利用redis库自带的Args 和 AddFlat对结构体进行转换。然后以hash类型存储。
+// 该方式实现简单，但存在最大的问题是不支持数组结构（如：结构体中内嵌结构体、数组等）。
 func DoHashStore(key string, src interface{}) (string, error) {
 	conn := RedisConn.Get()
 	defer conn.Close()
@@ -151,64 +152,72 @@ func DoGobGet(key string, dest interface{}) error {
 	return decoder.Decode(dest)
 }
 
-// JSON Encoding
-func DoJsonStore(key string, src interface{}) (string, error) {
+// DoJSONStore JSON Encoding
+func DoJSONStore(key string, src interface{}) (string, error) {
 	conn := RedisConn.Get()
 	defer conn.Close()
 
-	datas, err := json.Marshal(src)
+	data, err := json.Marshal(src)
 	if err != nil {
 		return "", err
 	}
-	return redis.String(conn.Do("set", key, datas))
+	return redis.String(conn.Do("set", key, data))
 }
 
-func DoJsonGet(key string, dest interface{}) error {
+func DoJSONGet(key string, dest interface{}) error {
 	conn := RedisConn.Get()
 	defer conn.Close()
 
-	datas, err := redis.Bytes(conn.Do("get", key))
+	data, err := redis.Bytes(conn.Do("get", key))
 	if err != nil {
 		return err
 	}
-	return json.Unmarshal(datas, dest)
+	return json.Unmarshal(data, dest)
 }
 
 func Pipelining() {
 	conn := RedisConn.Get()
 	defer conn.Close()
 
-	//发送命令至缓冲区
-	conn.Send("HSET", "student", "name", "wd", "age", "22")
-	conn.Send("HSET", "student", "Score", "100")
-	conn.Send("HGET", "student", "age")
+	// 发送命令至缓冲区
+	_ = conn.Send("HSET", "student", "name", "wd", "age", "22")
+	_ = conn.Send("HSET", "student", "Score", "100")
+	_ = conn.Send("HGET", "student", "age")
 
-	conn.Flush() //清空缓冲区，将命令一次性发送至服务器
+	conn.Flush() // 清空缓冲区，将命令一次性发送至服务器
 
-	//依次读取服务器响应结果，当读取的命令未响应时，该操作会阻塞。
+	// 依次读取服务器响应结果，当读取的命令未响应时，该操作会阻塞。
 	res1, err := conn.Receive()
-	fmt.Printf("Receive res1:%v \n", res1)
-	res2, err := conn.Receive()
-	fmt.Printf("Receive res2:%v\n", res2)
-	res3, err := conn.Receive()
-	fmt.Printf("Receive res3:%s\n", res3)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Printf("Receive res1:%v \n", res1)
+
+	res2, err := conn.Receive()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Receive res2:%v\n", res2)
+
+	res3, err := conn.Receive()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Receive res3:%s\n", res3)
 }
 
 func transaction() {
 	conn := RedisConn.Get()
 	defer conn.Close()
 
-	//MULTI：开启事务
-	//EXEC：执行事务
-	//DISCARD：取消事务
-	//WATCH：监视事务中的键变化，一旦有改变则取消事务。
+	// MULTI：开启事务
+	// EXEC：执行事务
+	// DISCARD：取消事务
+	// WATCH：监视事务中的键变化，一旦有改变则取消事务。
 
-	conn.Send("MULTI")
-	conn.Send("INCR", "foo")
-	conn.Send("INCR", "bar")
+	_ = conn.Send("MULTI")
+	_ = conn.Send("INCR", "foo")
+	_ = conn.Send("INCR", "bar")
 	r, err := conn.Do("EXEC")
 	fmt.Println(r)
 	if err != nil {

@@ -2,8 +2,9 @@ package main
 
 import (
 	"errors"
-	"github.com/gorilla/websocket"
 	"sync"
+
+	"github.com/gorilla/websocket"
 )
 
 type Connection struct {
@@ -83,7 +84,6 @@ func (conn *Connection) readLoop() {
 			// closeChan 关闭的时候
 			goto ERR
 		}
-
 	}
 ERR:
 	conn.Close()

@@ -2,9 +2,10 @@ package safemap_test
 
 import (
 	"fmt"
-	"github.com/devhg/LearnGo/demo/safemap"
 	"log"
 	"testing"
+
+	"github.com/devhg/LearnGo/demo/safemap"
 )
 
 func TestNewSafeMap(t *testing.T) {
@@ -21,5 +22,4 @@ func TestNewSafeMap(t *testing.T) {
 	}
 
 	smap.Close()
-	//smap.Close()
 }

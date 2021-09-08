@@ -37,20 +37,20 @@ func Test() {
 	}
 	fmt.Printf("%q: {%d,%d}\n", q.Name, q.X, q.Y)
 
-	//var network bytes.Buffer
-	//encoder := gob.NewEncoder(&network)
-	//decoder := gob.NewDecoder(&network)
-	//
-	//err := encoder.Encode(P{3, 4, 5, "pp"})
-	//if err != nil {
-	//	log.Fatal("encode error ", err)
-	//}
-	//
-	//var q Q
-	//err = decoder.Decode(&q)
-	//if err != nil {
-	//	log.Fatal("decode error ", err)
-	//}
-	//
-	//fmt.Printf("%q: {%d, %d}\n", q.Name, q.X, q.Y)
+	// var network bytes.Buffer
+	// encoder := gob.NewEncoder(&network)
+	// decoder := gob.NewDecoder(&network)
+
+	// err := encoder.Encode(P{3, 4, 5, "pp"})
+	// if err != nil {
+	// 	log.Fatal("encode error ", err)
+	// }
+
+	// var q Q
+	// err = decoder.Decode(&q)
+	// if err != nil {
+	// 	log.Fatal("decode error ", err)
+	// }
+
+	// fmt.Printf("%q: {%d, %d}\n", q.Name, q.X, q.Y)
 }

@@ -3,7 +3,6 @@ package algorithm
 import "fmt"
 
 func Main() {
-
 	var num = []int{1, 2, 3, 4}
 	var resp []int
 	resp = append(resp, num[0])

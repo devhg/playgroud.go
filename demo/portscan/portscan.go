@@ -70,8 +70,8 @@ var mu sync.Mutex
 
 func main() {
 	// 用于先上项目问题检测
-	//curl http://127.0.0.1:6060/debug/pprof/trace?seconds=20 > trace.out
-	//go tool trace trace.out
+	// curl http://127.0.0.1:6060/debug/pprof/trace?seconds=20 > trace.out
+	// go tool trace trace.out
 	go func() {
 		http.ListenAndServe("0.0.0.0:6060", nil)
 	}()

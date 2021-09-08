@@ -1,4 +1,4 @@
-package dataStruct
+package datastruct
 
 import (
 	"fmt"
@@ -6,16 +6,16 @@ import (
 	"testing"
 )
 
-//map使用哈希表，必须可以比较相等
-//除了slice map function的内建类型都可以作为key
-//struct类型不包含上述字段，也可以作为可以
+// map使用哈希表，必须可以比较相等
+// 除了slice map function的内建类型都可以作为key
+// struct类型不包含上述字段，也可以作为可以
 func TestMap(t *testing.T) {
-	//fmt.Println([]byte("abdbcd"))
-	//defineMap()
-	//traverMap()
-	//getValue()
-	//deleteMap()
-	//traverMapSorted()
+	// fmt.Println([]byte("abdbcd"))
+	// defineMap()
+	// traverMap()
+	// getValue()
+	// deleteMap()
+	// traverMapSorted()
 }
 
 // 定义map
@@ -56,7 +56,7 @@ func traverMap() {
 
 // 顺序遍历map
 // map遍历是无序的
-//如果需要顺序，需要通过切片对key进行手动排序
+// 如果需要顺序，需要通过切片对key进行手动排序
 func traverMapSorted() {
 	fmt.Println("Travering map sorted")
 	var m1 = map[string]interface{}{

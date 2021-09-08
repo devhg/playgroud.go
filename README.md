@@ -1,13 +1,13 @@
-# Golang学习代码笔记
+# Golang
 
 ```text
 .
 ├── README.md
-├── demo
-├── playground  // 练习
-├── go.mod
-├── pkg         // 自用封装
-└── wg.go
+├── algorithm  // 算法
+├── benchmark  // 基准测试
+├── demo       // 一些库demo
+├── pkg        // 自用封装
+├── playground // 乱七八糟
 ```
 
 <hr>

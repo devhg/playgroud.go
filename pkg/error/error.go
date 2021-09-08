@@ -2,10 +2,11 @@ package merror
 
 import (
 	"fmt"
+
 	"github.com/pkg/errors"
 )
 
-//文章：https://learnku.com/go/t/33210
+// 文章：https://learnku.com/go/t/33210
 type ErrorType uint
 
 const (
@@ -56,7 +57,7 @@ func New(msg string) error {
 
 // Newf 用于格式化创建一个 errorPlus 对象
 func Newf(format string, args ...interface{}) error {
-	newErr := errors.New(fmt.Sprintf(format, args...))
+	newErr := fmt.Errorf(format, args...)
 	return errorPlus{errType: NoType, err: newErr}
 }
 

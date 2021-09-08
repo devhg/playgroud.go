@@ -33,7 +33,7 @@ func StrContactByfmSpf() string {
 	return str
 }
 
-//bytes.Buffer
+// bytes.Buffer
 func StrContactByBuffer() string {
 	var buffer bytes.Buffer
 	for _, s := range a {
@@ -42,7 +42,7 @@ func StrContactByBuffer() string {
 	return buffer.String()
 }
 
-//strings.Builder
+// strings.Builder
 func StrContactByBuilder() string {
 	var builder strings.Builder
 	for _, s := range a {

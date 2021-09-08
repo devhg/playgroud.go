@@ -10,10 +10,10 @@ import (
 	"time"
 )
 
-//panic recover demo
+// panic recover demo
 
 /****************************************/
-//自动重启因为panic而退出的进程
+// 自动重启因为panic而退出的进程
 func NeverExit(name string, f func()) {
 	defer func() {
 		if v := recover(); v != nil {
@@ -40,7 +40,7 @@ func TestRun(t *testing.T) {
 }
 
 /****************************************/
-//一旦panic发生，内嵌函数将跳转到defer处，可以实现跨函数跳转，但不推荐这样做
+// 一旦panic发生，内嵌函数将跳转到defer处，可以实现跨函数跳转，但不推荐这样做
 func TestRun1(t *testing.T) {
 	n := func() (result int) {
 		defer func() {
@@ -66,7 +66,7 @@ func TestRun1(t *testing.T) {
 }
 
 /****************************************/
-//最快响应
+// 最快响应
 func longReq(r chan<- int) {
 	time.Sleep(time.Second * 3)
 	r <- rand.Intn(100)
@@ -76,14 +76,14 @@ func TestRun2(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	a, b := make(chan int), make(chan int)
 
-	//base mode
+	// base mode
 	startTime := time.Now()
 	go longReq(a)
 	go longReq(b)
 	fmt.Println(<-a, <-b)
 	fmt.Println("base mode:", time.Since(startTime))
 
-	//fast mode
+	// fast mode
 	ch := make(chan int, 5)
 	startTime = time.Now()
 	for i := 0; i < cap(ch); i++ {
@@ -136,11 +136,11 @@ func one2more() {
 	<-done
 	<-done
 	<-done
-	//可以用sync.WaitGroup优雅的实现
+	// 可以用sync.WaitGroup优雅的实现
 }
 
-//通过通道的关闭实现群发通知
-//从一个已经关闭的通道可以接收到无穷个值。实际上这一个特性被广泛用于标准库，如context
+// 通过通道的关闭实现群发通知
+// 从一个已经关闭的通道可以接收到无穷个值。实际上这一个特性被广泛用于标准库，如context
 func one2moreByclose() {
 	worker := func(id int, ready <-chan struct{}, done chan<- struct{}) {
 		<-ready
@@ -162,7 +162,7 @@ func one2moreByclose() {
 	<-done
 	<-done
 	<-done
-	//可以用sync.WaitGroup优雅的实现
+	// 可以用sync.WaitGroup优雅的实现
 }
 
 func AfterDuration(d time.Duration) <-chan struct{} {
@@ -175,12 +175,12 @@ func AfterDuration(d time.Duration) <-chan struct{} {
 }
 
 func TestRun3(t *testing.T) {
-	//one2one()
-	//one2more()
-	//one2moreByclose()
+	// one2one()
+	// one2more()
+	// one2moreByclose()
 	<-AfterDuration(time.Second * 2)
 	fmt.Println("hello")
-	//select {}
+	// select {}
 }
 
 /****************************************/
@@ -208,8 +208,8 @@ func myMutex() {
 	fmt.Println(counter) // 2000
 }
 
-//将通道用作技术信号量
-//计数信号量常常被用作限制最大并发数
+// 将通道用作技术信号量
+// 计数信号量常常被用作限制最大并发数
 func countSemaphore() {
 	rand.Seed(time.Now().UnixNano())
 	token := make(chan struct{}, 10)
@@ -226,23 +226,23 @@ func countSemaphore() {
 		token <- struct{}{}
 	}
 
-	for workerId := 1; ; workerId++ {
+	for workerID := 1; ; workerID++ {
 		time.Sleep(time.Second)
-		go worker(workerId)
+		go worker(workerID)
 	}
 }
 func TestRun4(t *testing.T) {
-	//myMutex()
+	// myMutex()
 	countSemaphore()
 }
 
 /****************************************/
-//使用通道传输数据
+// 使用通道传输数据
 
 var counter = func(n int) chan<- chan<- int {
 	requests := make(chan chan<- int)
 	go func() {
-		//process
+		// process
 		for request := range requests {
 			if request == nil {
 				n++
@@ -273,7 +273,7 @@ func TestRun5(t *testing.T) {
 }
 
 /****************************************/
-//超时机制
+// 超时机制
 func TestRun6(t *testing.T) {
 	c := make(chan int)
 	select {
@@ -285,7 +285,7 @@ func TestRun6(t *testing.T) {
 }
 
 /****************************************/
-//脉搏器
+// 脉搏器
 func Tick(d time.Duration) <-chan struct{} {
 	c := make(chan struct{}, 1)
 	go func() {
@@ -301,10 +301,10 @@ func Tick(d time.Duration) <-chan struct{} {
 }
 
 func TestRun7(t *testing.T) {
-	//start := time.Now()
-	//for range Tick(time.Second * 3) {
-	//	fmt.Println(time.Since(start))
-	//}
+	// start := time.Now()
+	// for range Tick(time.Second * 3) {
+	// 	fmt.Println(time.Since(start))
+	// }
 	start := time.Now()
 	for {
 		select {
@@ -315,7 +315,7 @@ func TestRun7(t *testing.T) {
 }
 
 /****************************************/
-//速率限制
+// 速率限制
 type Request interface{}
 
 func handle(r Request) {
@@ -325,7 +325,7 @@ func handle(r Request) {
 const RateLimit = 200 // 200 request/min
 const RateLimitPeriod = time.Minute
 
-//速率限制核心逻辑
+// 速率限制核心逻辑
 func handleRequest(requests <-chan Request) {
 	quotas := make(chan time.Time, RateLimit)
 	go func() {
@@ -354,7 +354,7 @@ func TestRun8(t *testing.T) {
 	}
 }
 
-//乒乓球
+// 乒乓球
 type Ball uint8
 
 func play(playName string, table chan Ball, serve bool) {
@@ -387,18 +387,18 @@ func TestRun9(t *testing.T) {
 	go play("A", table, false)
 	play("B", table, true)
 
-	//for c := make(chan struct{}, 1); true; {
-	//	select {
-	//	case <-c:
-	//		fmt.Println(1)
-	//	case c <- struct{}{}:
-	//		fmt.Println(2)
-	//	}
-	//	time.Sleep(time.Second)
-	//}
+	// for c := make(chan struct{}, 1); true; {
+	// 	select {
+	// 	case <-c:
+	// 		fmt.Println(1)
+	// 	case c <- struct{}{}:
+	// 		fmt.Println(2)
+	// 	}
+	// 	time.Sleep(time.Second)
+	// }
 }
 
-//select控制代码被执行的概率
+// select控制代码被执行的概率
 func TestRun10(t *testing.T) {
 	foo, bar := make(chan struct{}), make(chan struct{})
 	close(foo)

@@ -2,6 +2,7 @@ package gredis
 
 import (
 	"fmt"
+
 	"github.com/gomodule/redigo/redis"
 )
 
@@ -10,7 +11,7 @@ func Subscribe(channel string) {
 	defer conn.Close()
 
 	pubSubConn := redis.PubSubConn{Conn: conn}
-	pubSubConn.Subscribe(channel) // 订阅频道
+	_ = pubSubConn.Subscribe(channel) // 订阅频道
 
 	for {
 		switch v := pubSubConn.Receive().(type) {

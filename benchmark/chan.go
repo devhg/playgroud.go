@@ -19,7 +19,7 @@ func ChanMain() {
 					close(quit)
 					return
 				}
-				//fmt.Print("A")
+				// fmt.Print("A")
 				count++
 				b <- struct{}{}
 			case <-quit:
@@ -36,7 +36,7 @@ func ChanMain() {
 					close(quit)
 					return
 				}
-				//fmt.Print("B")
+				// fmt.Print("B")
 				count++
 				c <- struct{}{}
 			case <-quit:
@@ -53,7 +53,7 @@ func ChanMain() {
 					close(quit)
 					return
 				}
-				//fmt.Print("C")
+				// fmt.Print("C")
 				count++
 				a <- struct{}{}
 			case <-quit:

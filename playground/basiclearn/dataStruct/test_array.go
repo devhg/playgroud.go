@@ -1,4 +1,4 @@
-package dataStruct
+package datastruct
 
 import (
 	"fmt"
@@ -24,7 +24,6 @@ func TestArray() {
 	// 指针数组
 	printArrayByPoint(&arr2)
 	fmt.Println(arr2)
-
 }
 
 // 这里只能接收  [3]int的数组

@@ -43,7 +43,7 @@ func Decode(reader *bufio.Reader) (string, error) {
 		return "", err
 	}
 
-	packet := make([]byte, int32(4+length))
+	packet := make([]byte, 4+length)
 	_, err = reader.Read(packet)
 	if err != nil {
 		return "", err

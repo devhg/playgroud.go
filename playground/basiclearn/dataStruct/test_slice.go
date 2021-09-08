@@ -1,4 +1,4 @@
-package dataStruct
+package datastruct
 
 import (
 	"fmt"
@@ -35,26 +35,26 @@ func updateSlice(s []int) {
 
 // 打印切片
 func printSlice(s []int) {
-	//for i, v := range s {
-	//	fmt.Println(i, " ", v)
-	//}
+	// for i, v := range s {
+	// 	fmt.Println(i, " ", v)
+	// }
 	fmt.Printf("%v, len=%d, cap=%d\n", s, len(s), cap(s))
 }
 
 // 切片的扩展
-//添加元素的时候如果超过cap，系统会重新分配更大的底层数组，把内容拷贝过去
-//原来的数组若不在使用，将会被gc
-//由于值传递的关系，必须接受append的返回值
+// 添加元素的时候如果超过cap，系统会重新分配更大的底层数组，把内容拷贝过去
+// 原来的数组若不在使用，将会被gc
+// 由于值传递的关系，必须接受append的返回值
 func extendSlice() {
 	fmt.Println("Extending slice")
 	arr := [...]int{0, 1, 2, 3, 4, 5, 6, 7}
 	s1 := arr[2:6] // {2, 3, 4, 5} 6 7
 	s2 := s1[3:5]  // {5, 6} 7
 	fmt.Printf("s1=%v, len(s1)=%d, cap(s1)=%d\n",
-		s1, len(s1), cap(s1)) //s1=[2 3 4 5], len(s1)=4, cap(s1)=6
+		s1, len(s1), cap(s1)) // s1=[2 3 4 5], len(s1)=4, cap(s1)=6
 
 	fmt.Printf("s2=%v, len(s2)=%d, cap(s2)=%d\n",
-		s2, len(s2), cap(s2)) //s2=[5 6], len(s2)=2, cap(s2)=3
+		s2, len(s2), cap(s2)) // s2=[5 6], len(s2)=2, cap(s2)=3
 
 	// 这里没有越界的原因看slice底层原理
 

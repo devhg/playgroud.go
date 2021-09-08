@@ -13,7 +13,7 @@ func TestSnowflake(t *testing.T) {
 	count := 10000
 	defer close(ch)
 	wg.Add(count)
-	//并发 count个goroutine 进行 snowFlake ID 生成
+	// 并发 count个goroutine 进行 snowFlake ID 生成
 	for i := 0; i < count; i++ {
 		go func() {
 			defer wg.Done()

@@ -9,10 +9,6 @@ func TestMains(t *testing.T) {
 	slice := make([]int, 0)
 	slice = append(slice, 1)
 
-	p := slice[0:len(slice)]
+	p := slice[0:]
 	fmt.Println(p)
-}
-
-func test(a *int) {
-	*a = 10
 }

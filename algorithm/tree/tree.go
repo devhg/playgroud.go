@@ -54,7 +54,7 @@ func GetDegree(root *TreeNode) (maxDegree int) {
 	if leftMax > rightMax {
 		maxDegree = leftMax
 	} else {
-		maxDegree = leftMax
+		maxDegree = rightMax
 	}
 	return maxDegree + 1
 }

@@ -19,26 +19,25 @@ func ContinueCopy() {
 	defer dest.Close()
 	defer src.Close()
 
-	temp.Seek(0, io.SeekStart)
+	_, _ = temp.Seek(0, io.SeekStart)
 	bytes := make([]byte, 1)
 
 	n1, err := temp.Read(bytes)
 	if err != nil {
-		//panic(err)
+		panic(err)
 	}
 
 	countStr := string(bytes[:n1])
-	//fmt.Println(countStr)
+	// fmt.Println(countStr)
 
 	count, _ := strconv.ParseInt(countStr, 10, 64)
-	//fmt.Println(count)
+	// fmt.Println(count)
 
-	src.Seek(count, io.SeekStart)
-	dest.Seek(count, io.SeekStart)
+	_, _ = src.Seek(count, io.SeekStart)
+	_, _ = dest.Seek(count, io.SeekStart)
 
 	data := make([]byte, 1)
-	n2 := -1
-	n3 := -1
+	n2, n3 := -1, -1
 	total := int(count)
 
 	for i := 0; i < 2; i++ {
@@ -52,9 +51,9 @@ func ContinueCopy() {
 		}
 		n3, _ = dest.Write(data[:n2])
 		total += n3
-		temp.Seek(0, io.SeekStart)
-		temp.WriteString(strconv.Itoa(total))
+		_, _ = temp.Seek(0, io.SeekStart)
+		_, _ = temp.WriteString(strconv.Itoa(total))
 
-		//break // 中断
+		// break // 中断
 	}
 }

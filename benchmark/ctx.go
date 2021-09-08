@@ -12,7 +12,7 @@ func CtxMain() {
 		for {
 			select {
 			case <-a:
-				//fmt.Print("A")
+				// fmt.Print("A")
 				done <- struct{}{}
 			case <-ctx.Done():
 				return
@@ -23,7 +23,7 @@ func CtxMain() {
 		for {
 			select {
 			case <-b:
-				//fmt.Print("B")
+				// fmt.Print("B")
 				done <- struct{}{}
 			case <-ctx.Done():
 				return
@@ -34,7 +34,7 @@ func CtxMain() {
 		for {
 			select {
 			case <-c:
-				//fmt.Print("C")
+				// fmt.Print("C")
 				done <- struct{}{}
 			case <-ctx.Done():
 				return

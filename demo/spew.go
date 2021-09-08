@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/davecgh/go-spew/spew"
 	"reflect"
 	"unsafe"
+
+	"github.com/davecgh/go-spew/spew"
 )
 
 type Person struct {

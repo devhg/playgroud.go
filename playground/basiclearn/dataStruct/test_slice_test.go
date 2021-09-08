@@ -1,4 +1,4 @@
-package dataStruct
+package datastruct
 
 import (
 	"fmt"

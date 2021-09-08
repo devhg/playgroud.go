@@ -2,6 +2,7 @@ package gredis
 
 import (
 	"fmt"
+
 	"github.com/gomodule/redigo/redis"
 )
 

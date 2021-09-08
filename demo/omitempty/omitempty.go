@@ -1,9 +1,8 @@
-package omitempty
+package main
 
 import (
 	"encoding/json"
 	"fmt"
-	"testing"
 )
 
 type Address struct {
@@ -18,13 +17,14 @@ type coordinate struct {
 	Lng *float64 `json:"longitude,omitempty"`
 }
 
-func TestMarshal(t *testing.T) {
+func main() {
 	data := `{
         "latitude": 1.0,
         "longitude": 0.0
     }`
+
 	c := &coordinate{}
-	json.Unmarshal([]byte(data), c)
+	_ = json.Unmarshal([]byte(data), c)
 	fmt.Printf("%#v\n", c)
 
 	addressBytes, _ := json.MarshalIndent(c, "", "    ")

@@ -24,7 +24,7 @@ const (
 	dataCenterIDBits = uint64(5)  // 10bit 工作机器ID中的 5bit dataCenterID
 	sequenceBits     = uint64(12) // 12位序列号，表示同一机器同一毫秒可以生成 2<<12 -1个id
 
-	maxWorkerID     = int64(-1) ^ (int64(-1) << workerIDBits) //节点ID的最大值 用于防止溢出
+	maxWorkerID     = int64(-1) ^ (int64(-1) << workerIDBits) // 节点ID的最大值 用于防止溢出
 	maxDataCenterID = int64(-1) ^ (int64(-1) << dataCenterIDBits)
 	maxSequence     = int64(-1) ^ (int64(-1) << sequenceBits)
 
@@ -35,7 +35,7 @@ const (
 	twepoch = int64(1589923200000) // 常量时间戳(毫秒)
 )
 
-//分布式情况下,我们应通过外部配置文件或其他方式为每台机器分配独立的id
+// 分布式情况下,我们应通过外部配置文件或其他方式为每台机器分配独立的id
 func NewWorker(workerID, dataCenterID int64) *Worker {
 	return &Worker{
 		LastStamp:    0,

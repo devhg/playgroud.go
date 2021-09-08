@@ -50,7 +50,7 @@ func TestSet(t *testing.T) {
 }
 
 type TestStruct struct {
-	Id    int    `redis:"id" json:"id"`
+	ID    int    `redis:"id" json:"id"`
 	Name  string `redis:"name" json:"name"`
 	Sex   string `redis:"sex" json:"sex"`
 	Desc  string `redis:"desc" json:"desc"`
@@ -65,7 +65,7 @@ type TestStruct struct {
 }
 
 var testStruct = TestStruct{
-	Id:    1,
+	ID:    1,
 	Name:  "devhui",
 	Sex:   "男",
 	Desc:  "1",
@@ -105,13 +105,13 @@ func TestDoGobStore(t *testing.T) {
 
 // Test for json store
 func TestDoJsonStore(t *testing.T) {
-	_, err := DoJsonStore("json", testStruct)
+	_, err := DoJSONStore("json", testStruct)
 	if err != nil {
 		panic(err)
 	}
 
 	dest := &TestStruct{}
-	err = DoJsonGet("json", dest)
+	err = DoJSONGet("json", dest)
 	if err != nil {
 		panic(err)
 	}
