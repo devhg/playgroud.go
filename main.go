@@ -1,7 +1,6 @@
 package main
 
-import "fmt"
-
 func main() {
-	fmt.Println("(:")
+	var m map[int]int
+	m[1] = 2
 }
