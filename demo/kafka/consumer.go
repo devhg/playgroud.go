@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/zngw/kafka"
-	"github.com/zngw/log"
 	"os/signal"
 	"runtime"
 	"syscall"
+
+	"github.com/zngw/kafka"
+	"github.com/zngw/log"
 )
 
 func main() {

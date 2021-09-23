@@ -1,8 +1,9 @@
 package abstractfactory
 
 import (
-	"github.com/devhg/LearnGo/pkg/designpattern/abstractfactory/pipeline"
 	"testing"
+
+	"github.com/devhg/playgroud.go/pkg/designpattern/abstractfactory/pipeline"
 )
 
 // https://juejin.cn/post/6859015515344633863#heading-10
