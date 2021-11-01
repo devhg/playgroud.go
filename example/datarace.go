@@ -1,4 +1,4 @@
-// package main
+package main
 
 // func main() {
 // 	total, sum := 0, 0

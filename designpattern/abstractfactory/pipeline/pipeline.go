@@ -1,6 +1,6 @@
 package pipeline
 
-import "github.com/devhg/playgroud.go/pkg/designpattern/abstractfactory/plugin"
+import "github.com/devhg/playgroud.go/designpattern/abstractfactory/plugin"
 
 // 定义 Pipeline 消息处理结构体
 type Pipeline struct {

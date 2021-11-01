@@ -1,25 +1,31 @@
 package strcontact
 
-// func BenchmarkSprintf(b *testing.B) {
-// 	num := 10
-// 	b.ResetTimer()
-// 	for i := 0; i < b.N; i++ {
-// 		fmt.Sprintf("%d", num)
-// 	}
-// }
+import (
+	"fmt"
+	"strconv"
+	"testing"
+)
 
-// func BenchmarkFormat(b *testing.B) {
-// 	num := int64(10)
-// 	b.ResetTimer()
-// 	for i := 0; i < b.N; i++ {
-// 		strconv.FormatInt(num, 10)
-// 	}
-// }
+func BenchmarkSprintf(b *testing.B) {
+	num := 10
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		fmt.Sprintf("%d", num)
+	}
+}
 
-// func BenchmarkItoa(b *testing.B) {
-// 	num := 10
-// 	b.ResetTimer()
-// 	for i := 0; i < b.N; i++ {
-// 		strconv.Itoa(num)
-// 	}
-// }
+func BenchmarkFormat(b *testing.B) {
+	num := int64(10)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		strconv.FormatInt(num, 10)
+	}
+}
+
+func BenchmarkItoa(b *testing.B) {
+	num := 10
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		strconv.Itoa(num)
+	}
+}

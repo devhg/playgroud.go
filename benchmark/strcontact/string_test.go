@@ -3,7 +3,7 @@ package strcontact_test
 import (
 	"testing"
 
-	"github.com/devhg/LearnGo/benchmark/strcontact"
+	"github.com/devhg/playgroud.go/benchmark/strcontact"
 )
 
 // 1000个字符串连接

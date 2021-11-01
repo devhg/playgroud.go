@@ -1,4 +1,4 @@
-package msort
+package sort
 
 import "sort"
 

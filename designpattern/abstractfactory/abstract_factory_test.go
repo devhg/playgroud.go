@@ -3,7 +3,7 @@ package abstractfactory
 import (
 	"testing"
 
-	"github.com/devhg/playgroud.go/pkg/designpattern/abstractfactory/pipeline"
+	"github.com/devhg/playgroud.go/designpattern/abstractfactory/pipeline"
 )
 
 // https://juejin.cn/post/6859015515344633863#heading-10
