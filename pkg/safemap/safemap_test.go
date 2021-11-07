@@ -5,7 +5,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/devhg/LearnGo/demo/safemap"
+	"github.com/devhg/playgroud.go/pkg/safemap"
 )
 
 func TestNewSafeMap(t *testing.T) {

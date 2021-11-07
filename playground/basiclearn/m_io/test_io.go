@@ -14,6 +14,7 @@ func producer(data chan int, wg *sync.WaitGroup) {
 	data <- n
 	wg.Done()
 }
+
 func consumer(data chan int, done chan bool) {
 	f, err := os.Create("concurrent")
 	if err != nil {

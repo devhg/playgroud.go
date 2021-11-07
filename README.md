@@ -6,29 +6,12 @@
 ├── algorithm  // 算法
 ├── benchmark  // 基准测试
 ├── demo       // 一些库demo
+├── example    // 开源库使用案例
 ├── pkg        // 自用封装
 ├── playground // 乱七八糟
 ```
 
-### [Demo](demo/)
-```
-├── datarace.go
-├── errgroup
-├── fsnotify
-├── kafka
-├── kernalbalance
-├── lvs
-├── msort
-├── nsq
-├── omitempty
-├── panic-recover
-├── portscan
-├── safemap
-├── spew.go
-├── sync
-├── tcp
-└── udp
-```
+[工具链使用](toolchain.md)
 
 
 <hr>
