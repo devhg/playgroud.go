@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	
+
 	"github.com/devhg/es/dao"
 	"github.com/devhg/es/model"
 )
