@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/devhg/LearnGo/demo/tcp/proto"
+	"github.com/devhg/playgroud.go/example/tcp/proto"
 )
 
 func main() {
